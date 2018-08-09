@@ -35,7 +35,13 @@ class AccountForm extends Component {
   }
   render() {
     return (
-      <div class="container-app container">
+      <div
+        class="container-app container"
+        style={{
+          paddingTop: "60px",
+          paddingBottom: "40px"
+        }}
+      >
         <form>
           <div class="form-group">
             <h1>Create Account</h1>
