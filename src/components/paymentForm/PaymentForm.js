@@ -119,10 +119,15 @@ class PaymentForm extends Component {
                 <button
                   type="button"
                   class="btn btn-secondary btn-lg float-right"
+                  onClick={this.nextStep}
                 >
                   Next
                 </button>
-                <button type="button" class="btn btn-secondary btn-lg">
+                <button
+                  type="button"
+                  class="btn btn-secondary btn-lg"
+                  onClick={this.prevStep}
+                >
                   Previous
                 </button>
               </div>
