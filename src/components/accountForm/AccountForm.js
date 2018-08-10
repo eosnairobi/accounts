@@ -8,6 +8,10 @@ class AccountForm extends Component {
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
   }
+  nextStep = event => {
+    event.preventDefault();
+    this.props.nextStep();
+  };
   handleShow() {
     this.setState({ mode: "show" });
   }
@@ -36,7 +40,7 @@ class AccountForm extends Component {
   render() {
     return (
       <div
-        class="container-app container"
+        class="container"
         style={{
           paddingTop: "60px",
           paddingBottom: "40px"
@@ -81,6 +85,7 @@ class AccountForm extends Component {
           <div>
             <button
               type="button"
+              onClick={this.nextStep}
               class="btn btn-secondary btn-lg"
               style={{ marginTop: "10px" }}
             >
