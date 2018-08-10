@@ -51,7 +51,6 @@ class AccountForm extends Component {
             <h1>Create Account</h1>
             <label for="account-name">{this.props.labelOne}</label>
             <input
-              type="email"
               class="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
@@ -64,7 +63,6 @@ class AccountForm extends Component {
           <div class="form-group">
             <label for="owner-public-key">{this.props.labelTwo}</label>
             <input
-              type="password"
               class="form-control"
               id="owner-public-key"
               placeholder={this.props.placeholderTwo}
@@ -73,7 +71,6 @@ class AccountForm extends Component {
           <div class="form-group">
             <label for="active-public-key">{this.props.labelThree}</label>
             <input
-              type="password"
               class="form-control"
               id="active-public-key"
               placeholder={this.props.placeholderThree}
