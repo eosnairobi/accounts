@@ -50,7 +50,7 @@ class KeyGenerator extends Component {
             name="keys"
             src={keys}
             style={{ padding: "1em", marginTop: "13px" }}
-            theme="harmonic"
+            theme="shapeshifter:inverted"
           />
         </div>
       </div>
