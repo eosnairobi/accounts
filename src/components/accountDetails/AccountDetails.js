@@ -5,7 +5,6 @@ class AccountForm extends Component {
     return (
       <div>
         <div class="form-group">
-          {/* <h1>Create Account</h1> */}
           <label for="account-name">{this.props.labelOne}</label>
           <input
             class="form-control"
@@ -46,8 +45,7 @@ AccountForm.defaultProps = {
   placeholderOne: "eosnairobike",
   placeholderTwo: "EOS5wGBC13yRmxwgYUkRotn46a1B45BSnJFgNeqKhXS4jnPGqtNhZ",
   placeholderThree: "EOS6LPGe3dv2HZnAD5d22rnFYwn1RZFYgyjKtgZyHWXVhEep82nDV",
-  buttonLabel: "Next",
-  linkLabel: "Don't have an owner key and public key?"
+  buttonLabel: "Next"
 };
 
 export default AccountForm;
