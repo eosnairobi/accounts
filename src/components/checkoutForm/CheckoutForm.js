@@ -44,42 +44,38 @@ class CheckoutForm extends Component {
           paddingBottom: "40px"
         }}
       >
-        <div class="row">
-          <div class="col-10 align-items-center">
-            <div class="container" style={{ paddingTop: "10px" }}>
-              <h1>Confirmation</h1>
-              <br />
-              <h2>Account Details</h2>
-              <AccountDetails />
-              <select
-                class="custom-select"
-                onChange={this.handleChange}
-                value={this.state.value}
-              >
-                <option selected value="default">
-                  Select payment option
-                </option>
-                <option value="mpesa">Mpesa</option>
-                <option value="card">Card</option>
-              </select>
-              {this.renderComponents()}
-              <div style={{ paddingTop: "20px" }}>
-                <button
-                  type="button"
-                  class="btn btn-secondary btn-lg float-right"
-                  onClick={this.nextStep}
-                >
-                  Confirm
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary btn-lg"
-                  onClick={this.prevStep}
-                >
-                  Previous
-                </button>
-              </div>
-            </div>
+        <div class="container" style={{ paddingTop: "10px" }}>
+          <h1>Confirmation</h1>
+          <br />
+          <h2>Account Details</h2>
+          <AccountDetails />
+          <select
+            class="custom-select"
+            onChange={this.handleChange}
+            value={this.state.value}
+          >
+            <option selected value="default">
+              Select payment option
+            </option>
+            <option value="mpesa">Mpesa</option>
+            <option value="card">Card</option>
+          </select>
+          {this.renderComponents()}
+          <div style={{ paddingTop: "20px" }}>
+            <button
+              type="button"
+              class="btn btn-secondary btn-lg float-right"
+              onClick={this.nextStep}
+            >
+              Confirm
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary btn-lg"
+              onClick={this.prevStep}
+            >
+              Previous
+            </button>
           </div>
         </div>
       </div>
