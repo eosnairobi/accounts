@@ -3,33 +3,42 @@ import ecc from "eosjs-ecc";
 import ReactJson from "react-json-view";
 import clipboard from "clipboard";
 
+import loadinggif from "../../assets/loading.gif";
+
 class KeyGenerator extends Component {
   constructor(props) {
     super(props);
-    this.state = { keys: [] };
+    this.state = { keys: [], loading: false };
     this.generateNewKeys = this.generateNewKeys.bind(this);
     this.copyToClipboard = this.copyToClipboard.bind(this);
     this.saveToPdf = this.saveToPdf.bind(this);
   }
   generateNewKeys() {
+    this.setState({ loading: true });
     const keys = this.state.keys;
-    ecc.randomKey().then(privateKey => {
-      let publicKey = ecc.privateToPublic(privateKey);
-      // keys.push({ private: publicKey, public: privateKey });
-      keys.privateKeys = privateKey;
-      keys.publicKeys = publicKey;
-      this.setState({
-        keys
+    ecc
+      .randomKey()
+      .then(privateKey => {
+        let publicKey = ecc.privateToPublic(privateKey);
+        // keys.push({ private: publicKey, public: privateKey });
+        keys.privateKeys = privateKey;
+        keys.publicKeys = publicKey;
+        this.setState({
+          keys,
+          loading: false
+        });
+        console.log("Private " + keys.privateKeys);
+        console.log("Public " + keys.publicKeys);
+      })
+      .catch(err => {
+        console.log(err);
       });
-      console.log("Private " + keys.privateKeys);
-      console.log("Public " + keys.publicKeys);
-    });
   }
   saveToPdf() {
     var keys = this.state.keys.slice(0);
     var keysObj = {};
-    let copyPrivateKey = document.getElementById("privateKey").value;
-    let copyPublicKey = document.getElementById("publicKey").value;
+    let copyPrivateKey = document.getElementById("input-private-key").value;
+    let copyPublicKey = document.getElementById("input-public-key").value;
     keys.PrivateKey = copyPrivateKey;
     keys.PublickKey = copyPublicKey;
     var jsPDF = require("jspdf");
@@ -47,8 +56,8 @@ class KeyGenerator extends Component {
   copyToClipboard() {
     const keys = this.state.keys.slice(0);
 
-    let copyPrivateKey = document.getElementById("privateKey").value;
-    let copyPublicKey = document.getElementById("publicKey").value;
+    let copyPrivateKey = document.getElementById("input-private-key").value;
+    let copyPublicKey = document.getElementById("input-public-key").value;
     keys.PrivateKey = copyPrivateKey;
     keys.PublickKey = copyPublicKey;
 
@@ -95,9 +104,40 @@ class KeyGenerator extends Component {
   }
 
   render() {
-    const { keys } = this.state;
+    const { keys, loading } = this.state;
     const publicKey = this.state.keys.publicKeys;
     const privateKey = this.state.keys.privateKeys;
+
+    let generteComponent;
+
+    if (loading) {
+      generteComponent = <img src={loadinggif} alt="loading" />;
+    } else {
+      generteComponent = (
+        <div>
+          {" "}
+          <div class="form-group">
+            <label for="public-key">Public Key</label>
+            <input
+              class="form-control"
+              id="input-public-key"
+              aria-describedby="emailHelp"
+              value={publicKey}
+            />
+          </div>
+          <div class="form-group">
+            <label for="private-key">Private Key</label>
+            <input
+              class="form-control"
+              id="input-private-key"
+              aria-describedby="emailHelp"
+              placeholder={this.props.placeholderOne}
+              value={privateKey}
+            />
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div>
@@ -128,25 +168,7 @@ class KeyGenerator extends Component {
           </button>
         </div>
         <br />
-        <div class="form-group">
-          <label for="public-key">Public Key</label>
-          <input
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            value={publicKey}
-          />
-        </div>
-        <div class="form-group">
-          <label for="private-key">Private Key</label>
-          <input
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder={this.props.placeholderOne}
-            value={privateKey}
-          />
-        </div>
+        {generteComponent}
       </div>
     );
   }
