@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import AccountForm from "../accountForm/AccountForm";
-import PaymentForm from "../paymentForm/PaymentForm";
-// import CheckoutForm from "../checkoutForm/CheckoutForm";
+import CheckoutForm from "../checkoutForm/CheckoutForm";
+import StartPage from "../startPage/StartPage";
+import GeneralPage from "../generalPage/GeneralPage";
 
 class Home extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Home extends Component {
     };
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
+    this.skipStep = this.skipStep.bind(this);
   }
   nextStep() {
     console.log("Peter");
@@ -19,17 +21,25 @@ class Home extends Component {
   prevStep() {
     this.setState({ step: this.state.step - 1 });
   }
+  skipStep() {
+    // var stepp =
+    this.setState({ step: this.state.step + 2 });
+  }
 
   render() {
     switch (this.state.step) {
       case 1:
-        return <AccountForm nextStep={this.nextStep} />;
+        return <StartPage nextStep={this.nextStep} skipStep={this.skipStep} />;
       case 2:
         return (
-          <PaymentForm nextStep={this.nextStep} prevStep={this.prevStep} />
+          <GeneralPage nextStep={this.nextStep} prevStep={this.prevStep} />
         );
-      //   case 3:
-      //     return <CheckoutForm prevStep={this.prevStep} />;
+      case 3:
+        return (
+          <AccountForm nextStep={this.nextStep} prevStep={this.prevStep} />
+        );
+      case 4:
+        return <CheckoutForm nextStep={this.nextStep} />;
       default:
         break;
     }
