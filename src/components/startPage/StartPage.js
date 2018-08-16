@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 
 class StartPage extends Component {
+  nextStep = event => {
+    event.preventDefault();
+    this.props.nextStep();
+  };
+  skipStep = event => {
+    event.preventDefault();
+    this.props.skipStep();
+  };
   render() {
     return (
       <header
@@ -18,10 +26,15 @@ class StartPage extends Component {
             type="button"
             class="btn btn-secondary"
             style={{ marginRight: "20px" }}
+            onClick={this.props.nextStep}
           >
             Get Started
           </button>
-          <button type="button" class="btn btn-secondary">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onClick={this.props.skipStep}
+          >
             Skip to Accout Creation
           </button>
         </div>
