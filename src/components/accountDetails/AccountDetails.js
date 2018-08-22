@@ -15,7 +15,6 @@ class AccountForm extends Component {
     this.setState({ [name]: value });
   };
   render() {
-    console.log(this.state);
     return (
       <div>
         <InputForm
