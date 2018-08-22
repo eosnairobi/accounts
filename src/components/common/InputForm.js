@@ -1,16 +1,24 @@
 import React from "react";
 
-const InputForm = ({label, placeholder, smallText}) => {
+const InputForm = ({
+  label,
+  placeholder,
+  smallText,
+  value,
+  onChange,
+  name
+}) => {
   return (
-    <div class="form-group">
-      <label for="account-name">{label}</label>
+    <div className="form-group">
+      <label>{label}</label>
       <input
-        class="form-control"
+        name={name}
+        className="form-control"
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
-      <small class="form-text text-muted">
-        {smallText}
-      </small>
+      <small className="form-text text-muted">{smallText}</small>
     </div>
   );
 };
