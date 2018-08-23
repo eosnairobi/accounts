@@ -35,7 +35,7 @@ class KeyGenerator extends Component {
             type="button"
             className="btn btn-secondary btn-sm"
             onClick={this.generateNewKeys}
-            style={{ marginRight: "13px", marginTop: "10px" }}
+            style={{ marginRight: "13px", marginTop: "5px" }}
           >
             Generate New Keys
           </button>
@@ -43,7 +43,7 @@ class KeyGenerator extends Component {
           <button
             type="button"
             className="btn btn-secondary btn-sm"
-            style={{ marginTop: "10px" }}
+            style={{ marginTop: "8px" }}
             onClick={this.saveToPdf}
           >
             Save to Pdf
@@ -58,7 +58,8 @@ class KeyGenerator extends Component {
           src={this.state}
           style={{
             padding: "1em",
-            overflow: "hidden"
+            overflow: "hidden",
+            marginBottom: "10px"
           }}
           theme="rjv-default"
         />
