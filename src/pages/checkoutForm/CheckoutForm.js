@@ -38,19 +38,19 @@ class CheckoutForm extends Component {
   render() {
     return (
       <div
-        class="container"
+        className="container"
         style={{
           paddingTop: "60px",
           paddingBottom: "40px"
         }}
       >
-        <div class="container" style={{ paddingTop: "10px" }}>
+        <div className="container" style={{ paddingTop: "10px" }}>
           <h1>Confirmation</h1>
           <br />
           <h2>Account Details</h2>
           <AccountDetails />
           <select
-            class="custom-select"
+            className="custom-select"
             onChange={this.handleChange}
             value={this.state.value}
           >
@@ -64,15 +64,15 @@ class CheckoutForm extends Component {
           <div style={{ paddingTop: "20px" }}>
             <button
               type="button"
-              class="btn btn-secondary btn-lg float-right"
-              onClick={this.nextStep}
+              className="btn btn-secondary btn-lg float-right"
+              onClick={this.props.nextStep}
             >
               Confirm
             </button>
             <button
               type="button"
-              class="btn btn-secondary btn-lg"
-              onClick={this.prevStep}
+              className="btn btn-secondary btn-lg"
+              onClick={this.props.prevStep}
             >
               Previous
             </button>
