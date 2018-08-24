@@ -1,16 +1,39 @@
 import React, { Component } from "react";
-
+import Modal from "../../components/common/Modal";
 import AccountDetails from "../../components/accountDetails/AccountDetails";
 import KeyGenerator from "../../components/keyGenerator/KeyGenerator";
 
 class AccountForm extends Component {
   constructor(props) {
     super(props);
-    this.state = { mode: "hide" };
+    this.state = {
+      accountName: "",
+      ownerPublicKey: "",
+      activePublicKey: "",
+      modalMode: false
+    };
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+    this.nextStep = this.nextStep.bind(this);
   }
+  showModal = () => {
+    this.setState({ modalMode: true });
+  };
+  hideModal = () => {
+    this.setState({ modalMode: false });
+  };
+  handleInputChange = event => {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({ [name]: value });
+  };
+
   nextStep = event => {
+    console.log("my name e jeff");
     event.preventDefault();
     this.props.nextStep();
   };
@@ -36,7 +59,7 @@ class AccountForm extends Component {
       return (
         <button
           type="button"
-          class="btn btn-link"
+          className="btn btn-link"
           onClick={this.handleShow}
           style={{ paddingLeft: "0px" }}
         >
@@ -47,7 +70,7 @@ class AccountForm extends Component {
       return (
         <button
           type="button"
-          class="btn btn-link"
+          className="btn btn-link"
           style={{ paddingLeft: "0px" }}
           onClick={this.handleHide}
         >
@@ -59,14 +82,18 @@ class AccountForm extends Component {
   render() {
     return (
       <div
-        class="container"
+        className="container"
         style={{
           paddingTop: "60px"
         }}
       >
+        <Modal show={this.state.modalMode} handleClose={this.hideModal} />
         <h1>Account Details</h1>
         <br />
-        <AccountDetails />
+        <AccountDetails
+          value={this.state.value}
+          handleInputChange={this.handleInputChange}
+        />
         {this.renderLink()}
         {this.renderKeyGenerator()}
         <div>
@@ -74,17 +101,25 @@ class AccountForm extends Component {
             onClick={this.props.prevStep}
             floated="left"
             type="button"
-            class="btn btn-secondary btn-sm"
+            className="btn btn-secondary btn-sm"
           >
             Previous
           </button>
           <button
-            onClick={this.props.nextStep}
+            onClick={this.nextStep}
             floated="right"
             type="button"
-            class="btn btn-secondary btn-sm float-right"
+            className="btn btn-secondary btn-sm float-right"
           >
             Next
+          </button>
+          <button
+            onClick={this.showModal}
+            floated="right"
+            type="button"
+            className="btn btn-secondary btn-sm float-right"
+          >
+            Show
           </button>
         </div>
       </div>
