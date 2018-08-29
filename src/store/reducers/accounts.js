@@ -1,6 +1,11 @@
 import { HANDLE_INPUT_CHANGE } from "../actions";
 
-const reducer = (state = {}, action) => {
+const initialState = {
+  accountName: "",
+  ownerPublicKey: "",
+  activePublicKey: ""
+};
+const reducer = (state = initialState, action) => {
   console.log(state);
   switch (action.type) {
     case HANDLE_INPUT_CHANGE:
