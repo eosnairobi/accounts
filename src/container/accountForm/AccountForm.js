@@ -9,9 +9,7 @@ const MapStateToProps = state => {
   return {
     accountName: state.accountName,
     ownerPublicKey: state.ownerPublicKey,
-    activePublicKey: state.activePublicKey,
-    showModal: state.showModal,
-    showKeyGen: state.showKeyGen
+    activePublicKey: state.activePublicKey
   };
 };
 
@@ -19,18 +17,23 @@ const MapDispatchToProps = dispatch => {
   return {
     onHandleInputChange: function(event) {
       dispatch(actions.handleInputChange(event));
-    },
-    onShowModal: function() {
-      dispatch(actions.showModal());
-    },
-    onShowKeygen: function() {
-      dispatch(actions.showKeyGen());
     }
   };
 };
 
 class AccountForm extends Component {
+  state = { showModal: false, showKeyGen: false };
+
+  toggleShowKeyGen = () => {
+    const showKeyGen = this.state.showKeyGen;
+    this.setState({ showKeyGen: !showKeyGen });
+  };
+
   render() {
+    let keyGenComponent = null;
+    if (this.state.showKeyGen) {
+      keyGenComponent = <KeyGenerator />;
+    }
     return (
       <div
         className="container"
@@ -38,7 +41,7 @@ class AccountForm extends Component {
           paddingTop: "60px"
         }}
       >
-        <Modal showModal={this.props.showModal}>
+        <Modal showModal={this.showModal}>
           Confirm that you have saved your public and private keys
         </Modal>
         <h1>Account Details</h1>
@@ -50,12 +53,12 @@ class AccountForm extends Component {
         <button
           type="button"
           className="btn btn-link"
-          onClick={this.props.onShowKeygen}
+          onClick={this.toggleShowKeyGen}
           style={{ paddingLeft: "0px" }}
         >
           Don't have a owner public key or active public key?
         </button>
-        <KeyGenerator />
+        {keyGenComponent}
         <div>
           <button
             onClick={this.props.prevStep}
