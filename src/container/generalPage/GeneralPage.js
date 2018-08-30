@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class GeneralPage extends Component {
   nextStep = event => {
@@ -38,22 +39,26 @@ class GeneralPage extends Component {
           supported.
         </p>
         <div>
-          <button
-            onClick={this.props.prevStep}
-            floated="left"
-            type="button"
-            class="btn btn-secondary "
-          >
-            Previous
-          </button>
-          <button
-            onClick={this.props.nextStep}
-            floated="right"
-            type="button"
-            class="btn btn-secondary float-right"
-          >
-            Next
-          </button>
+          <Link to="/">
+            <button
+              onClick={this.props.prevStep}
+              floated="left"
+              type="button"
+              class="btn btn-secondary "
+            >
+              Previous
+            </button>
+          </Link>
+          <Link to="/account-info">
+            <button
+              onClick={this.props.nextStep}
+              floated="right"
+              type="button"
+              class="btn btn-secondary float-right"
+            >
+              Next
+            </button>
+          </Link>
         </div>
       </div>
     );
