@@ -2,6 +2,25 @@ import React, { Component } from "react";
 import CardPayment from "../../components/accountDetails/AccountDetails";
 import MpesaPayment from "../../components/mpesaPayment/MpesaPayment";
 import AccountDetails from "../../components/accountDetails/AccountDetails";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
+import { Link } from "react-router-dom";
+
+const MapStateToProps = state => {
+  return {
+    accountName: state.accountName,
+    ownerPublicKey: state.ownerPublicKey,
+    activePublicKey: state.activePublicKey
+  };
+};
+
+const MapDispatchToProps = dispatch => {
+  return {
+    onHandleInputChange: function(event) {
+      dispatch(actions.handleInputChange(event));
+    }
+  };
+};
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -48,7 +67,10 @@ class CheckoutForm extends Component {
           <h1>Confirmation</h1>
           <br />
           <h2>Account Details</h2>
-          <AccountDetails />
+          <AccountDetails
+            value={this.props}
+            handleInputChange={this.props.onHandleInputChange}
+          />
           <select
             className="custom-select"
             onChange={this.handleChange}
@@ -69,13 +91,15 @@ class CheckoutForm extends Component {
             >
               Confirm
             </button>
-            <button
-              type="button"
-              className="btn btn-secondary btn-lg"
-              onClick={this.props.prevStep}
-            >
-              Previous
-            </button>
+            <Link to="/account-info">
+              <button
+                type="button"
+                className="btn btn-secondary btn-lg"
+                onClick={this.props.prevStep}
+              >
+                Previous
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -83,4 +107,7 @@ class CheckoutForm extends Component {
   }
 }
 
-export default CheckoutForm;
+export default connect(
+  MapStateToProps,
+  MapDispatchToProps
+)(CheckoutForm);
