@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Modal from "../../components/common/Modal";
 import AccountDetails from "../../components/accountDetails/AccountDetails";
 import KeyGenerator from "../../components/keyGenerator/KeyGenerator";
@@ -22,11 +23,13 @@ const MapDispatchToProps = dispatch => {
 };
 
 class AccountForm extends Component {
-  state = { showModal: false, showKeyGen: false };
+  state = { showModal: false, keyGen: false };
 
   toggleShowKeyGen = () => {
     const showKeyGen = this.state.showKeyGen;
     this.setState({ showKeyGen: !showKeyGen });
+    const showModal = this.state.showModal;
+    this.setState({ showModal: !showModal });
   };
 
   render() {
@@ -41,7 +44,7 @@ class AccountForm extends Component {
           paddingTop: "60px"
         }}
       >
-        <Modal showModal={this.showModal}>
+        <Modal showModal={this.state.showModal}>
           Confirm that you have saved your public and private keys
         </Modal>
         <h1>Account Details</h1>
@@ -60,34 +63,28 @@ class AccountForm extends Component {
         </button>
         {keyGenComponent}
         <div>
-          <button
-            onClick={this.props.prevStep}
-            floated="left"
-            type="button"
-            className="btn btn-secondary btn-sm"
-          >
-            Previous
-          </button>
-          <button
-            onClick={this.props.onShowModal}
-            floated="right"
-            type="button"
-            className="btn btn-secondary btn-sm float-right"
-            data-toggle="modal"
-            data-target="#exampleModalLong"
-          >
-            Next
-          </button>
-          <button
-            onClick={this.showModal}
-            floated="right"
-            type="button"
-            className="btn btn-secondary btn-sm float-right"
-            data-toggle="modal"
-            data-target="#exampleModalLong"
-          >
-            Show
-          </button>
+          <Link to="/general-info">
+            <button
+              onClick={this.props.prevStep}
+              floated="left"
+              type="button"
+              className="btn btn-secondary btn-sm"
+            >
+              Previous
+            </button>
+          </Link>
+          <Link to="/checkout">
+            <button
+              // onClick={this.goNext}
+              floated="right"
+              type="button"
+              className="btn btn-secondary btn-sm float-right"
+              // data-toggle="modal"
+              // data-target="#exampleModalLong"
+            >
+              Next
+            </button>
+          </Link>
         </div>
       </div>
     );
