@@ -1,17 +1,18 @@
 import React from "react";
-
+// if (props.showModal) {
+//   let modal = document.getElementById("modalButton");
+//   modal.click();
+// }
 const Modal = props => {
-  // if (!show.showModal) {
-  //   return null;
-  // }
-  // console.log(show);
   return (
     <div>
       <button
         type="button"
+        id="modalButton"
         className="btn btn-primary"
         data-toggle="modal"
         data-target="#exampleModalLong"
+        hidden="true"
       >
         Launch demo modal
       </button>
