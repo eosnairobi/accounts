@@ -6,7 +6,6 @@ const initialState = {
   activePublicKey: ""
 };
 const reducer = (state = initialState, action) => {
-  console.log(state);
   switch (action.type) {
     case HANDLE_INPUT_CHANGE:
       return {
